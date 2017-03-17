@@ -244,7 +244,7 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
 * +--------------------------------------------------------------------------------------</SIGNATURE>
   METHOD add_header_via_fcat.
 ************************************************************************
-* @Importing@  IT_FCAT  -> Liste görüntüleyici kontrolü için alan kataloğu
+* @Importing@  IT_FCAT  -> Field Catalog for List Viewer Control
 ************************************************************************
     DATA: ls_fcat  TYPE lvc_s_fcat,
           lt_lines TYPE gty_tt_string,
@@ -464,7 +464,8 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
           cl_gui_frontend_services=>file_open_dialog(
             EXPORTING
               default_extension       = 'xls'            " Default Extension
-              file_filter             = '(*.xls)|*.xls|' " File Extension Filter String
+              file_filter             = 'Excel Workbook (*.xlsx)|*.xlsx|' &&
+                                        'Excel 97-2003 Workbook (*.xls)|*.xls|' " File Extension Filter String
               initial_directory       = 'C:\'            " Initial Directory
               multiselection          =  ''              " Multiple selections poss.
             CHANGING
@@ -521,7 +522,7 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
       ELSE.
         lv_wbname = i_wbname.
       ENDIF.
-      path = path && '\' && lv_wbname && '.xls'.
+      path = path && '\' && lv_wbname && '.xlsx'.
       REPLACE ALL OCCURRENCES OF '\\' IN path WITH '\'.
     ENDIF.
     " visible?
