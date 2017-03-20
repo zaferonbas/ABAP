@@ -463,7 +463,7 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
         WHEN 'O'. " Open
           cl_gui_frontend_services=>file_open_dialog(
             EXPORTING
-              default_extension       = 'xls'            " Default Extension
+              default_extension       = 'xlsx'            " Default Extension
               file_filter             = 'Excel Workbook (*.xlsx)|*.xlsx|' &&
                                         'Excel 97-2003 Workbook (*.xls)|*.xls|' " File Extension Filter String
               initial_directory       = 'C:\'            " Initial Directory
