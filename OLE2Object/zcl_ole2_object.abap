@@ -295,7 +295,6 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
         lo_abap_typedescr = cl_abap_typedescr=>describe_by_data( p_data = <lv_val> ).
         " Write line
         me->writeline(
-              EXPORTING
                 io_abap_typedescr = lo_abap_typedescr " Runtime Type Services
                 iv_val            = <lv_val> " Value
             ).
@@ -312,10 +311,9 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
         lo_abap_typedescr = cl_abap_typedescr=>describe_by_data( p_data = <lv_val> ).
         " Write line
         me->writeline(
-              EXPORTING
                 io_abap_typedescr = lo_abap_typedescr " Runtime Type Services
                 iv_val            = <lv_val> " Value
-            ).
+        ).
       ENDDO.
     ENDIF.
     "*-
@@ -340,7 +338,6 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
     "*-
     LOOP AT it_table ASSIGNING <ls_line>.
       me->add_line(
-        EXPORTING
           is_line = <ls_line>
           i_fcat  = i_fcat " Using field catalog match?
       ).
@@ -448,8 +445,8 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
 * @Importing@  I_WBNAME          -> Workbook name (Filename)
 * @Importing@  I_PATH            -> Path for Open/Create file
 * @Importing@  I_MODE            -> O:Open / C:Create
-* @Exception@  EMPTY_PATH        -> Dosya/Klasör yolu seçilmedi
-* @Exception@  MISSING_FILENAME  -> Açılacak dosyanın tam yolu seçilmedi
+* @Exception@  EMPTY_PATH        -> File/Folder path is not selected
+* @Exception@  MISSING_FILENAME  -> Filename is missing in path
 ************************************************************************
     DATA: lv_visible TYPE i,
           lv_wsname  TYPE text30,
@@ -463,7 +460,7 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
         WHEN 'O'. " Open
           cl_gui_frontend_services=>file_open_dialog(
             EXPORTING
-              default_extension       = 'xlsx'            " Default Extension
+              default_extension       = 'xlsx'           " Default Extension
               file_filter             = 'Excel Workbook (*.xlsx)|*.xlsx|' &&
                                         'Excel 97-2003 Workbook (*.xls)|*.xls|' " File Extension Filter String
               initial_directory       = 'C:\'            " Initial Directory
@@ -540,7 +537,6 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
     ENDIF.
     " Create object
     me->create_object(
-      EXPORTING
         i_visible = lv_visible  " Visible?
         i_wsname  = lv_wsname   " Worksheet Name
         i_mode    = i_mode      " O:Open / C:Create
@@ -612,7 +608,6 @@ CLASS ZCL_OLE2_OBJECT IMPLEMENTATION.
           #1 = path.
       " Save
       me->save_document(
-        EXPORTING
           i_visible     = i_visible
           i_compcheck   = 0
           i_replacefile = 1
